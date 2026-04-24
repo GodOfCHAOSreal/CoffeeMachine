@@ -33,6 +33,9 @@ func main() {
 			for drink, recipe := range domain.DefaultRecipes() {
 				fmt.Printf("%s - %d\n", drink, recipe.Price)
 			}
+		case "stats":
+			ord, money := machine.Stats()
+			fmt.Printf("Заказов - %d, Денег получено - %d\n", ord, money)
 		case "stock":
 			if len(args) < 2 {
 				fmt.Println("usage")
@@ -82,10 +85,12 @@ func main() {
 			payment, err := strconv.Atoi(args[3])
 			if err != nil {
 				fmt.Println(domain.ErrorNotCorrect)
+				continue
 			}
 			steps, err := machine.Brew(args[1], payment)
 			if err != nil {
 				fmt.Println(err)
+				continue
 			}
 			for _, step := range steps {
 				fmt.Println(step)
