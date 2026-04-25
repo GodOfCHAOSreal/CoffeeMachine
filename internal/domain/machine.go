@@ -1,13 +1,13 @@
 package domain
 
 type Machine struct {
-	Stock   *Stock
+	Stock   Storage
 	Recipe  map[string]Recipe
 	Orders  int
 	Revenue int
 }
 
-func NewMachine(stock *Stock) *Machine {
+func NewMachine(stock Storage) *Machine {
 	return &Machine{
 		Stock:  stock,
 		Recipe: DefaultRecipes(),
@@ -29,4 +29,8 @@ func (m *Machine) Brew(drinkName string, pay int) ([]string, error) {
 	m.Revenue += m.Recipe[drinkName].Price
 
 	return m.Recipe[drinkName].Steps, nil
+}
+
+func (m *Machine) Stats() (int, int) {
+	return m.Orders, m.Revenue
 }
