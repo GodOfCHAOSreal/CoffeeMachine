@@ -3,8 +3,8 @@ package domain
 import "errors"
 
 var (
-	ErrorDrinkNotFound        = errors.New("Напиток не найден! Такое мы здесь не подаём, Друг!")
-	ErrorNotEnoughPay         = errors.New("Денег, увы, недостаточно:(")
-	ErrorNotEnoughIngridients = errors.New("На складе не хватает ингридиентов для этого напитка!")
-	ErrorNotCorrect           = errors.New("Ты ошибся параметром, Друг!")
+	ErrorDrinkNotFound        = errors.New("напиток не найден")
+	ErrorNotEnoughPay         = errors.New("недостаточно оплаты")
+	ErrorNotEnoughIngridients = errors.New("не хватает ингридиентов")
+	ErrorNotCorrect           = errors.New("некорректные параметры")
 )
