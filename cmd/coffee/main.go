@@ -9,13 +9,18 @@ import (
 	"strings"
 )
 
-var (
-	stock   = domain.NewStock()
-	machine = domain.NewMachine(stock)
-)
+const stockFile = "stock.txt"
 
 func main() {
+	stock, err := domain.LoadStock(stockFile)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	machine := domain.NewMachine(stock)
+
 	scanner := bufio.NewScanner(os.Stdin)
+
 	for {
 		if !scanner.Scan() {
 			break
@@ -96,6 +101,11 @@ func main() {
 				fmt.Println(step)
 			}
 			fmt.Printf("Ваш %s готов!\n", args[1])
+
+		case "exit":
+			stock.Save(stockFile)
+			fmt.Println("Ваши данные сохранены. Всего доброго!")
+			return
 		default:
 			fmt.Println("usage")
 
