@@ -1,4 +1,4 @@
-beans=984
-water=940
+beans=968
+water=790
 milk=850
 sugar=1000

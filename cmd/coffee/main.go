@@ -10,6 +10,7 @@ import (
 )
 
 const stockFile = "stock.txt"
+const statsFile = "stats.txt"
 
 func main() {
 	stock, err := domain.LoadStock(stockFile)
@@ -18,6 +19,10 @@ func main() {
 	}
 
 	machine := domain.NewMachine(stock)
+	err = machine.LoadStats(statsFile)
+	if err != nil {
+		fmt.Println(err)
+	}
 
 	scanner := bufio.NewScanner(os.Stdin)
 
@@ -105,6 +110,10 @@ func main() {
 		case "exit":
 			stock.Save(stockFile)
 			fmt.Println("Ваши данные сохранены. Всего доброго!")
+			err := machine.SaveStats(statsFile)
+			if err != nil {
+				fmt.Println(err)
+			}
 			return
 		default:
 			fmt.Println("usage")
